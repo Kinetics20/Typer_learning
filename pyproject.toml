@@ -1,0 +1,30 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "card"
+version = "0.0.1"
+description = "Mini project for testing typer, rich and flit"
+authors = [{name = "Piotr Lipinski", email = "kinetics20@gmail.com"}]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "rich>=13.9.4",
+    "typer>=0.15.1",
+]
+
+[tool.flit.module]
+name = "src"
+
+[project.scripts]
+card = "src.commands_1:app"
+
+[project.urls]
+Home = "https://github.com/sirrobin/foobar"
+
+
+[dependency-groups]
+dev = [
+    "flit>=3.10.1",
+]
