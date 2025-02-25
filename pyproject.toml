@@ -19,6 +19,7 @@ name = "src"
 
 [project.scripts]
 card = "src.commands_1:app"
+contacts = "src.contacts:app"
 
 [project.urls]
 Home = "https://github.com/sirrobin/foobar"

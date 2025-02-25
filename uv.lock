@@ -2,9 +2,9 @@ version = 1
 requires-python = ">=3.13"
 
 [[package]]
-name = "card-cli"
-version = "0.1.0"
-source = { virtual = "." }
+name = "card"
+version = "0.0.1"
+source = { editable = "." }
 dependencies = [
     { name = "rich" },
     { name = "typer" },
