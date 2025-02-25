@@ -9,8 +9,8 @@ console = Console()
 CONTACTS_FILE = "contacts.json"
 
 
-
 def load_contacts():
+    """Loads contacts from the JSON file."""
     try:
         with open(CONTACTS_FILE, "r") as f:
             return json.load(f)
@@ -19,27 +19,43 @@ def load_contacts():
 
 
 def save_contacts(contacts):
+    """Saves contacts to the JSON file."""
     with open(CONTACTS_FILE, "w") as f:
         json.dump(contacts, f, indent=4)
 
 
-
 @app.command()
-def add(name: str, phone: str, email: str ):
-    """Adds a new contact."""
-    contacts = load_contacts()
-    if name in contacts:
-        console.print(f"[red]Contact {name} already exists![/red]")
-        return
+def add_contact(
+    contacts: list[str] = typer.Argument(...)
+):
+    """
+    Adds one or multiple contacts at once.
 
-    contacts[name] = {"phone": phone, "email": email}
-    save_contacts(contacts)
-    console.print(f"[green]Added contact:[/green] {name} - {phone} ({email})")
+    Each contact should be in the format: "Name,Phone,Email".
+
+    Examples:
+        cont add "John Doe,123-456-789,john@example.com"
+        cont add "Jane Doe,987-654-321,jane@example.com" "Mike Smith,555-123-456,mike@example.com"
+    """
+    contact_book = load_contacts()
+
+    for contact in contacts:
+        try:
+            name, phone, email = contact.split(',')
+            name, phone, email = name.strip(), phone.strip(), email.strip()
+            if name in contact_book:
+                console.print(f"[yellow]Contact {name} already exists![/yellow]")
+            else:
+                contact_book[name] = {"phone": phone, "email": email}
+                console.print(f"[green]Added contact:[/green] {name} - {phone} - {email}")
+        except ValueError:
+            console.print(f"[red]Invalid format:[/red] {contact} (expected: Name,Phone,Email)")
+
+    save_contacts(contact_book)
 
 
-
-@app.command()
-def list():
+@app.command(name="list")
+def list_contacts():
     """Lists all contacts."""
     contacts = load_contacts()
     if not contacts:
@@ -53,7 +69,6 @@ def list():
     console.print(table)
 
 
-
 @app.command()
 def find(name: str):
     """Finds a contact by name."""
@@ -63,7 +78,6 @@ def find(name: str):
         console.print(f"[blue]Found:[/blue] {name} - {details['phone']} ({details['email']})")
     else:
         console.print(f"[red]Contact {name} not found.[/red]")
-
 
 
 @app.command()
@@ -81,7 +95,6 @@ def update(name: str, phone: str = "", email: str = ""):
 
     save_contacts(contacts)
     console.print(f"[yellow]Updated contact:[/yellow] {name}")
-
 
 
 @app.command()

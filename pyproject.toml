@@ -18,8 +18,9 @@ dependencies = [
 name = "src"
 
 [project.scripts]
-card = "src.commands_1:app"
+card = "src.commands:app"
 contacts = "src.contacts:app"
+cont = "src.cont:app"
 
 [project.urls]
 Home = "https://github.com/sirrobin/foobar"

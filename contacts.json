@@ -1,0 +1,14 @@
+{
+    "John Doe": {
+        "phone": "123-456-789",
+        "email": "john@example.com"
+    },
+    "Jane Doe": {
+        "phone": "987-654-321",
+        "email": "jane@example.com"
+    },
+    "Mike Smith": {
+        "phone": "555-123-456",
+        "email": "mike@example.com"
+    }
+}
