@@ -10,5 +10,13 @@
     "Anna Jonson": {
         "phone": "0048 823-498-769",
         "email": "ann.jonson@example.com"
+    },
+    "Kris Kozinski": {
+        "phone": "677-689-876",
+        "email": "kris@example.com"
+    },
+    "Samanta White": {
+        "phone": "555-123-456",
+        "email": "samantha.white@example.com"
     }
 }
